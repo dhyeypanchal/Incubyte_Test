@@ -33,6 +33,15 @@ const leftRight = (current_dir,next_dir)=>{
     return directions[newIndex];
 }
 
+// now for Up and down
+let prev_dir;
+const UpDown = (initial_dir,next_dir)=>{
+    if (initial_dir!=="up" && initial_dir!=="down") {
+        prev_dir = initial_dir;
+    }
+    return next_dir === "up" ? "Up":"Down";
+}
+
 
 // built test cases below
 describe("Chandrayaan 3 Lunar Craft: Galactic Space Craft Control",()=>{
@@ -41,18 +50,16 @@ describe("Chandrayaan 3 Lunar Craft: Galactic Space Craft Control",()=>{
     const initial_dir = "E";
     // this is for checking forward and backward
     test("forward backward check", () => {
-        const expected_Result = [2,5,7];
-        let result = forwardbackward(initial_pos, initial_dir);
-        expect(result).toEqual(expected_Result);
+        expect(forwardbackward(initial_pos, initial_dir)).toEqual([2, 5, 7]);
     });
 
     // this is for checking left and right
     test("left right check", () => {
-        const initial_dir = "E";
-        const expected_Result = "N";
-        const next_dir = "left"
+        expect(leftRight(initial_dir, "left")).toEqual("N");
+    });
 
-        let result = leftRight(initial_dir, next_dir);
-        expect(result).toEqual(expected_Result);
+    // this is for checking up and down
+    test("up down check", () => {
+        expect(UpDown(initial_dir, "up")).toEqual("Up");
     });
 });
